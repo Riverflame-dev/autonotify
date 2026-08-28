@@ -14,10 +14,9 @@ current="$(crontab -l 2>/dev/null | grep -v "$MARK" || true)"
 {
   printf '%s\n' "$current"
   echo "0 11 * * * $RUN >> $LOG 2>&1 $MARK"
-  echo "0 16 * * * $RUN >> $LOG 2>&1 $MARK"
 } | crontab -
 
-echo "Installed cron jobs (11:00 & 16:00 local):"
+echo "Installed cron job (11:00 local, daily):"
 crontab -l | grep "$MARK"
 echo
-echo "Tip: add --dry-run to $RUN calls during your trial week, or edit the crontab with: crontab -e"
+echo "Edit or remove with: crontab -e"
