@@ -1,0 +1,30 @@
+[project]
+name = "autoupdate"
+version = "0.1.0"
+description = "Privacy-preserving Gmail watcher for job-application activity (local semantic filter + Claude tiebreaker)"
+requires-python = ">=3.11"
+dependencies = [
+    "google-api-python-client>=2.100",
+    "google-auth-oauthlib>=1.2",
+    "sentence-transformers>=3.0",
+    "scikit-learn>=1.4",
+    "numpy>=1.26",
+    "anthropic>=0.40",
+    "requests>=2.31",
+    "pydantic>=2.6",
+    "pydantic-settings>=2.2",
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+
+[project.scripts]
+autoupdate = "autoupdate.cli:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["autoupdate"]

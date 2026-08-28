@@ -1,0 +1,20 @@
+# Secrets & credentials — never commit
+.env
+credentials.json
+token.json
+
+# Trained artifacts & caches
+data/model.pkl
+*.pyc
+__pycache__/
+.pytest_cache/
+.venv/
+venv/
+*.egg-info/
+
+# Runtime state & logs
+logs/
+state/
+
+# OS
+.DS_Store

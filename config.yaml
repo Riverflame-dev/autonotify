@@ -1,0 +1,44 @@
+# Autoupdate configuration — tune without editing code.
+
+# ---- Stage 1: local semantic filter ----
+embedding_model: "Qwen/Qwen3-Embedding-0.6B"  # swap to "BAAI/bge-large-en-v1.5" to benchmark
+mode: "head"                                    # "head" (logistic regression) or "prototype" (cosine)
+
+thresholds:
+  # An 'applied' email is counted without a Claude call when the head is at least this confident.
+  applied_confident: 0.80
+  # An email becomes an 'update' candidate (goes to Stage 2) when P(update) is at least this.
+  update_candidate: 0.45
+
+# ---- Stage 2: Claude tiebreaker ----
+stage2:
+  enabled: true                 # only update candidates reach this stage
+  backend: "claude_cli"         # "claude_cli" (personal subscription, no API key) or "api"
+  model: "claude-haiku-4-5"     # cheap/fast tier; passed to `claude -p --model`
+  config_dir: "~/.claude-personal"  # which Claude account `claude -p` uses (your personal sub)
+  subject_only_precheck: true   # cheaper subject-only pass before spending a body read
+  # Token counts are shown in the run report; under a subscription there is no per-call charge.
+  price_in_per_mtok: 0.0
+  price_out_per_mtok: 0.0
+
+# ---- Stage 0: pull ----
+pull:
+  overlap_minutes: 30           # look back this far past last success (dedup makes it safe)
+  max_results: 200              # safety cap per run
+  first_run_lookback_hours: 24  # window used the very first time, before a checkpoint exists
+
+# ---- Notifications ----
+notify:
+  notify_on_zero: false         # skip the "Applications sent" notification when count == 0
+  server: "https://ntfy.sh"     # ntfy server; topic comes from NTFY_TOPIC in .env
+
+# ---- Paths (relative to repo root) ----
+paths:
+  store: "data/store.csv"
+  model: "data/model.pkl"
+  checkpoint: "state/checkpoint.json"
+  processed_ids: "state/processed_ids.txt"
+  decision_log: "logs/decisions.jsonl"
+  run_report: "logs/run-report.txt"
+  credentials: "credentials.json"
+  token: "token.json"

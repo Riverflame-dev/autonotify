@@ -1,0 +1,233 @@
+text,label,source
+"We received your application
+Thank you for applying to the Software Engineer role at Acme. We have received your application and will review it shortly.",applied,synthetic
+"Thanks for applying to Stripe
+Your application for Backend Engineer has been submitted successfully. No action is needed from you at this time.",applied,synthetic
+"Application received — Data Analyst
+This confirms we've received your application. Our team reviews every submission and will be in touch.",applied,synthetic
+"Your application to Notion has been received
+We appreciate your interest in the Product Designer position. Sit tight while we review.",applied,synthetic
+"Application confirmation
+Hi, this is an automated message confirming your application for the Marketing Associate opening was received.",applied,synthetic
+"Thank you for your interest in Databricks
+We've received your application for the role of ML Engineer. You'll hear from us if there's a match.",applied,synthetic
+"We got your application!
+Thanks for applying to the Frontend Developer position at Figma. Your materials are in our system.",applied,synthetic
+"Application submitted successfully
+Your application for Senior Accountant at Deloitte was submitted. A recruiter may reach out.",applied,synthetic
+"thanks for applying
+application received for the warehouse associate role. we will review and contact qualified candidates.",applied,synthetic
+"Confirmation of your application - Nurse Practitioner
+We confirm receipt of your application to Kaiser Permanente. Thank you for your interest.",applied,synthetic
+"Your application has been received - Amazon
+Thanks for applying. This email confirms we received your application for Operations Manager.",applied,synthetic
+"We have received your resume
+Thank you for submitting your resume for the Sales Development Rep role. We'll be in touch.",applied,synthetic
+"Application received: Mechanical Engineer
+This is to confirm that Boeing has received your application. No further action is required now.",applied,synthetic
+"Thanks for your application to Shopify
+We've got it! Your application for the Growth Marketer role is now under review.",applied,synthetic
+"Received: your application for UX Researcher
+Thank you for applying. We received your application and our team will review it carefully.",applied,synthetic
+"Application successfully submitted
+You applied to the Financial Analyst position at JPMorgan. This email confirms your submission.",applied,synthetic
+"Thank you for applying - Google
+We have received your application for the role of Site Reliability Engineer. We appreciate your interest.",applied,synthetic
+"Your job application was received
+This confirms receipt of your application for Barista at Blue Bottle. Thanks for applying!",applied,synthetic
+"We received your application for Teacher
+Thank you for your interest in joining our district. Your application has been received.",applied,synthetic
+"Application acknowledgement
+Acknowledging receipt of your application for the Civil Engineer position. We will review and respond.",applied,synthetic
+"Fwd: Your application to Airbnb was received
+---------- Forwarded message ---------
+Thanks for applying to the Trust & Safety Analyst role, we have your application.",applied,synthetic
+"thx for applying
+got your app for the line cook position. reviewing now.",applied,synthetic
+"Application Received — Pharmacist
+CVS Health confirms we received your application. A member of our team will review it.",applied,synthetic
+"Your submission is complete
+You've successfully applied to the Content Writer role at HubSpot. We received everything.",applied,synthetic
+"We've received your application
+Thank you for applying to Tesla for the Manufacturing Technician position. Application received.",applied,synthetic
+"Confirmation: Graphic Designer application
+Thank you! We confirm your application to Canva has been received and logged.",applied,synthetic
+"Application received for Project Manager
+We appreciate your application. Our recruiters will review it against the requirements.",applied,synthetic
+"Thanks — we got your application
+Your application for the Customer Success Manager role at Zendesk is in. Thanks for applying.",applied,synthetic
+"Your application to Meta has been received
+Thank you for your interest in the Research Scientist role. Your application was received.",applied,synthetic
+"Application received — thank you
+We confirm receipt of your application for the Bank Teller position. We'll be in touch soon.",applied,synthetic
+"We received your application for DevOps Engineer
+Thanks for applying to Cloudflare. This is an automated confirmation of receipt.",applied,synthetic
+"Your application is under review
+Thank you for applying to the Registered Nurse role at Mayo Clinic. We received your application.",applied,synthetic
+"Received your application - Paralegal
+This email confirms we have received your application. No action needed at this time.",applied,synthetic
+"Thanks for applying to Airbnb
+We've received your application for Software Engineer, Payments. We'll review and reach out if it's a fit.",applied,synthetic
+"Application confirmation — Electrician
+We confirm receipt of your job application. Our hiring team reviews applications on a rolling basis.",applied,synthetic
+"we received your application
+thank you for applying to the retail associate position at target. application received.",applied,synthetic
+"Interview invitation — Backend Engineer
+We were impressed by your application and would like to invite you to a first-round interview. Please pick a time.",update,synthetic
+"Let's schedule your interview
+Hi! We'd love to move forward with your application. Are you available for a 45-minute technical interview next week?",update,synthetic
+"Next steps: onsite interview at Stripe
+Congratulations on passing the phone screen. We'd like to invite you to a full onsite loop.",update,synthetic
+"Invitation to interview - Product Manager
+Thank you for applying. We'd like to schedule a video interview with the hiring manager. Please share your availability.",update,synthetic
+"You're moving to the interview round
+Great news — the team reviewed your application and wants to interview you. Let's find a time.",update,synthetic
+"Fwd: interview scheduling
+---------- Forwarded message ---------
+The panel is available Thursday or Friday for your final interview. Which works?",update,synthetic
+"Online assessment for your application
+As the next step in your application, please complete this 60-minute coding assessment within 5 days.",update,synthetic
+"Coding challenge - please complete
+Thank you for applying. Before we proceed, complete the take-home assessment linked here.",update,synthetic
+"Next step: HackerRank assessment
+You've advanced in the process! Please complete the online assessment by Friday to continue.",update,synthetic
+"Complete your skills assessment
+As part of your application, we'd like you to complete a short online assessment. Link inside.",update,synthetic
+"Take-home assignment for Data Scientist role
+Thanks for your interest. Please complete the attached take-home within one week.",update,synthetic
+"Can we hop on a quick call?
+Hi, I'm a recruiter at Notion and reviewed your application. Do you have 20 minutes this week for an intro call?",update,synthetic
+"Recruiter screen — scheduling
+Thanks for applying! I'd like to set up a brief phone screen to learn more about your background.",update,synthetic
+"Phone screen request
+We'd like to schedule a 30-minute phone screen for the Analyst role. Please reply with times that work.",update,synthetic
+"Intro call about your application
+A recruiter from Databricks would like to connect regarding the ML Engineer role you applied to.",update,synthetic
+"Offer of employment — Software Engineer
+We are thrilled to extend you an offer for the Software Engineer position! Details and compensation attached.",update,synthetic
+"Congratulations! Your offer from Figma
+After a great interview process, we'd like to formally offer you the Product Designer role.",update,synthetic
+"We'd like to make you an offer
+The team loved meeting you. We're excited to extend an offer for the Marketing Manager position.",update,synthetic
+"Your offer letter is ready
+Congratulations! Please review and sign your offer letter for the Operations Analyst role.",update,synthetic
+"Offer: Senior Data Engineer at Snowflake
+We are pleased to offer you the position. Your start date, salary, and equity details are enclosed.",update,synthetic
+"Update on your application
+Thank you for your interest. After careful review, we've decided to move forward with other candidates.",update,synthetic
+"Regarding your application to Google
+We appreciate the time you invested. Unfortunately, we won't be proceeding with your application at this time.",update,synthetic
+"unfortunately
+we've decided not to move forward. thanks for applying and best of luck.",update,synthetic
+"An update on your candidacy
+After careful consideration, we will not be advancing your application for the Analyst role. We wish you well.",update,synthetic
+"Your application status - Amazon
+Thank you for applying. We have decided to pursue other candidates whose qualifications more closely match.",update,synthetic
+"Thank you for interviewing with us
+We enjoyed meeting you, but have decided to move forward with another candidate for this role.",update,synthetic
+"Fwd: application decision
+---------- Forwarded message ---------
+Unfortunately the team has chosen not to proceed. We encourage you to apply again in the future.",update,synthetic
+"We won't be moving forward
+Thank you for your interest in Tesla. At this time we will not be advancing your application.",update,synthetic
+"Your application status has changed
+Good news — your application has moved to the 'Hiring Manager Review' stage. We'll update you soon.",update,synthetic
+"Update: your application advanced
+Your application for the Nurse role passed initial screening and is now with the hiring team.",update,synthetic
+"Reference check request
+Congratulations on progressing! As a next step, please provide two professional references.",update,synthetic
+"Background check — next step
+As part of finalizing your candidacy, please complete the background check authorization form.",update,synthetic
+"Second-round interview scheduled
+You've been invited to a second-round interview for the Sales role. Details and calendar invite attached.",update,synthetic
+"Final interview with the VP
+You've reached the final stage! We'd like to schedule a conversation with our VP of Engineering.",update,synthetic
+"Assessment results & next steps
+You passed the assessment! We'd like to move you to the interview stage. Please pick a slot.",update,synthetic
+"we'd like to invite you to interview
+your application stood out. can you do a 1hr technical interview tues or weds?",update,synthetic
+"Your interview is confirmed
+This confirms your interview for the Accountant role on Monday at 2pm. Please join via the link.",update,synthetic
+"Panel interview — please confirm
+We'd like to schedule a panel interview for your application to the Research Scientist position.",update,synthetic
+"You appeared in 12 searches this week
+See who's been looking at your LinkedIn profile. Upgrade to Premium to see all of them.",ignore,synthetic
+"Sarah and 3 others reacted to your post
+Your recent post is getting attention on LinkedIn. See who engaged.",ignore,synthetic
+"You have a new connection
+John Smith accepted your invitation to connect on LinkedIn. Say hello!",ignore,synthetic
+"Congratulations on your work anniversary
+Celebrate 3 years at your company! Share an update with your network.",ignore,synthetic
+"People you may know
+Here are professionals in your network you might want to connect with this week.",ignore,synthetic
+"Jobs you may be interested in
+We found 15 new jobs matching your profile: Software Engineer at X, Data Analyst at Y, and more.",ignore,synthetic
+"New jobs for you at Amazon
+Based on your searches, here are recommended openings. Apply now before they close!",ignore,synthetic
+"10 companies are hiring near you
+Discover new opportunities. These roles match your skills — apply today!",ignore,synthetic
+"Your job alert: Product Manager roles
+Here are the latest Product Manager jobs posted this week. Set up more alerts.",ignore,synthetic
+"We'd like to invite you to explore open roles
+Check out career opportunities at our company. Join our talent community today!",ignore,synthetic
+"Congratulations! You've been selected
+You're eligible for a $500 gift card. Complete this short survey to claim your reward now!",ignore,synthetic
+"Next steps to unlock your rewards
+You're just one step away from exclusive member benefits. Confirm your email to continue.",ignore,synthetic
+"Congratulations, you're a winner!
+Claim your free cruise now. Limited time offer — act fast before it expires!",ignore,synthetic
+"Your exclusive offer is waiting
+Enjoy 40% off your next purchase. Use code SAVE40 at checkout. Ends midnight!",ignore,synthetic
+"Flash sale: 50% off everything
+Our biggest sale of the year is here. Shop now and save big on all items!",ignore,synthetic
+"You've earned 500 bonus points
+Congratulations on reaching Gold status! Redeem your points for exclusive rewards.",ignore,synthetic
+"This week in tech
+The top stories in technology, curated for you. Read about AI, startups, and more.",ignore,synthetic
+"Your Monday newsletter
+Here's what's happening in the world of finance this week. 5-minute read inside.",ignore,synthetic
+"The Hustle: today's business news
+Coffee-fueled business and tech news to start your day. Unsubscribe anytime.",ignore,synthetic
+"Weekly digest from Medium
+Stories we think you'll love, based on your reading history. Happy reading!",ignore,synthetic
+"Product update: new features are here
+We've shipped exciting new features this month. See what's new in the app.",ignore,synthetic
+"We're hiring! Join our team
+Exciting opportunities await at our growing company. Explore open roles and apply today.",ignore,synthetic
+"Refer a friend and earn $1000
+Know someone great? Refer them for open roles and earn a referral bonus.",ignore,synthetic
+"Career fair this Saturday
+Meet top employers at our virtual career fair. Register now to reserve your spot.",ignore,synthetic
+"Your order has shipped
+Great news! Your package is on its way. Track your shipment with the link below.",ignore,synthetic
+"Your receipt from Uber
+Thanks for riding. Here's your trip receipt and fare breakdown for today's ride.",ignore,synthetic
+"Verify your email address
+Please confirm your email to activate your account. Click the button below to verify.",ignore,synthetic
+"Your statement is ready
+Your monthly account statement is now available to view online. Log in to review.",ignore,synthetic
+"Password reset requested
+We received a request to reset your password. If this wasn't you, ignore this email.",ignore,synthetic
+"Reminder: your subscription renews soon
+Your annual plan renews in 3 days. Update your payment method if needed.",ignore,synthetic
+"Meeting reminder: standup at 10am
+This is a reminder for your calendar event today. Join via the meeting link.",ignore,synthetic
+"Your invoice is due
+Invoice #4821 is due in 5 days. Please remit payment to avoid late fees.",ignore,synthetic
+"New login to your account
+We noticed a new sign-in from a new device. Was this you? Review your account activity.",ignore,synthetic
+"Webinar invite: scaling your startup
+Join our free webinar next Thursday. Reserve your seat and bring your questions!",ignore,synthetic
+"You left something in your cart
+Your items are waiting! Complete your purchase before they sell out.",ignore,synthetic
+"Survey: how did we do?
+We'd love your feedback on your recent experience. Take our 2-minute survey.",ignore,synthetic
+"Congratulations on completing the course
+You finished 'Intro to Python'! Download your certificate and share your achievement.",ignore,synthetic
+"Fwd: team lunch friday
+---------- Forwarded message ---------
+Don't forget the team lunch this friday at noon. rsvp please.",ignore,synthetic
+"Your daily briefing
+Here are today's headlines and the weather for your area. Have a great day!",ignore,synthetic
+"Upgrade to Premium and save
+Unlock unlimited features with our Premium plan. Special pricing for you this week only.",ignore,synthetic
