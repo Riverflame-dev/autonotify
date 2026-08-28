@@ -33,7 +33,7 @@ def cmd_run(cfg: Config, dry_run: bool, test_notify: bool) -> int:
 
     model_path = cfg.path("model")
     if not model_path.exists():
-        print(f"No trained model at {model_path}. Run `autoupdate train` first.", file=sys.stderr)
+        print(f"No trained model at {model_path}. Run `autonotify train` first.", file=sys.stderr)
         return 1
 
     clf = classify.Classifier.load(model_path)
@@ -68,6 +68,8 @@ def cmd_run(cfg: Config, dry_run: bool, test_notify: bool) -> int:
     report.applied = s1.applied_count
     report.update_candidates = len(s1.update_candidates)
     report.ignored = s1.ignored
+    if s1.applied_dups_dropped:
+        report.extra["confirmation_dups_dropped"] = s1.applied_dups_dropped
 
     # Stage 2 — Claude, paid, only if enabled.
     confirmed = []
@@ -94,7 +96,7 @@ def cmd_run(cfg: Config, dry_run: bool, test_notify: bool) -> int:
 
     sent = 0
     if s1.applied_count > 0 or cfg.get("notify.notify_on_zero", False):
-        notifier.send(notify.count_notification(s1.applied_count))
+        notifier.send(notify.count_notification(s1.applied_count, approx=s1.applied_dups_dropped > 0))
         sent += 1
     for u in confirmed:
         notifier.send(notify.update_notification(u))
@@ -155,13 +157,13 @@ def cmd_correct(cfg: Config, msg_id: str | None, text: str | None, label: str) -
         if write_header:
             w.writerow(["text", "label", "source"])
         w.writerow([text, label, "correction"])
-    print(f"Appended correction ({label}) to {store}. Run `autoupdate train` to apply.")
+    print(f"Appended correction ({label}) to {store}. Run `autonotify train` to apply.")
     return 0
 
 
 # --------------------------------------------------------------------------- #
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(prog="autoupdate", description="Gmail job-application watcher.")
+    parser = argparse.ArgumentParser(prog="autonotify", description="Gmail job-application watcher.")
     sub = parser.add_subparsers(dest="cmd", required=True)
 
     p_run = sub.add_parser("run", help="run the pipeline once")

@@ -1,4 +1,4 @@
-# autoupdate — job-application inbox watcher
+# autonotify — job-application inbox watcher
 
 A mostly-free, privacy-preserving pipeline that scans Gmail twice a day for job-application
 activity and sends two kinds of [ntfy](https://ntfy.sh) notification — an **applications-sent
@@ -28,10 +28,10 @@ python3.11 -m venv .venv && source .venv/bin/activate
 pip install -e .
 
 # 2. Train the local classifier from the bundled synthetic data
-autoupdate train
+autonotify train
 
 # 3. Try it without any accounts (prints to console, sends nothing, no state change)
-autoupdate run --dry-run     # (needs Gmail OAuth first — see TODO below)
+autonotify run --dry-run     # (needs Gmail OAuth first — see TODO below)
 pytest                       # offline unit tests, no accounts needed
 ```
 
@@ -42,8 +42,8 @@ pytest                       # offline unit tests, no accounts needed
   2. APIs & Services → Library → enable **Gmail API**.
   3. OAuth consent screen → **External**; add scope `.../auth/gmail.readonly`; add your Gmail as a **Test user** (stays in Testing mode, no verification needed).
   4. Credentials → Create → **OAuth client ID** → **Desktop app** → download JSON as `credentials.json` in this repo root.
-  5. First `autoupdate run` opens a browser once and caches `token.json`.
-- [ ] **ntfy** — pick a private, random topic; `cp .env.example .env` and set `NTFY_TOPIC=...`. Then `autoupdate run --test-notify` to confirm it reaches your phone.
+  5. First `autonotify run` opens a browser once and caches `token.json`.
+- [ ] **ntfy** — pick a private, random topic; `cp .env.example .env` and set `NTFY_TOPIC=...`. Then `autonotify run --test-notify` to confirm it reaches your phone.
 
 ### Stage 2 uses your Claude subscription (no API key)
 
@@ -65,12 +65,12 @@ Requires the `claude` CLI installed and logged in to that account. (Set `backend
 bash scripts/install_cron.sh
 
 # Trial week: run in dry-run and skim the decision log
-autoupdate run --dry-run
+autonotify run --dry-run
 tail -f logs/decisions.jsonl
 
 # Correct a mistake, then retrain — one command each
-autoupdate correct --id <message-id-from-the-log> --label update
-autoupdate train
+autonotify correct --id <message-id-from-the-log> --label update
+autonotify train
 ```
 
 `config.yaml` holds every tunable (thresholds, model, `mode: head|prototype`, `stage2.enabled`,
@@ -78,7 +78,7 @@ autoupdate train
 
 ## How validation works
 
-There's no hand-labeled test set. `autoupdate train` prints a cross-validation sanity check, but
+There's no hand-labeled test set. `autonotify train` prints a cross-validation sanity check, but
 the **real** signal is your dry-run decision log: run for ~a week, skim `logs/decisions.jsonl`
 (near-threshold decisions are flagged), `correct` the misses, `train` again. The classifier starts
 decent from generated data and converges on your real inbox through corrections.

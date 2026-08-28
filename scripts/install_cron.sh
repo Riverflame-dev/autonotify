@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 # Install the twice-daily (11:00 & 16:00 local) cron jobs.
-# Idempotent: removes any prior autoupdate lines first (matched by the marker comment).
+# Idempotent: removes any prior autonotify lines first (matched by the marker comment).
 set -euo pipefail
 
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 RUN="$REPO_DIR/scripts/run.sh"
 LOG="$REPO_DIR/logs/cron.log"
-MARK="# autoupdate-inbox-watcher"
+MARK="# autonotify-inbox-watcher"
 
 mkdir -p "$REPO_DIR/logs"
 

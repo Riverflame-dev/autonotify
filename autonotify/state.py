@@ -144,7 +144,7 @@ class RunReport:
         lines = [
             f"[{ts}] run report",
             f"  pulled           : {self.pulled}",
-            f"  applied (count)  : {self.applied}",
+            f"  confirmations    : {self.applied}  (deduped)",
             f"  update candidates: {self.update_candidates}",
             f"  ignored          : {self.ignored}",
             f"  sent to Claude   : {self.sent_to_claude}",

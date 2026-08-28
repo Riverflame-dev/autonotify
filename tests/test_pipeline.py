@@ -10,9 +10,9 @@ import types
 
 import numpy as np
 
-from autoupdate import classify
-from autoupdate.claude import verify
-from autoupdate.gmail import EmailMeta
+from autonotify import classify
+from autonotify.claude import verify
+from autonotify.gmail import EmailMeta
 
 
 # --------------------------------------------------------------------------- #
@@ -81,6 +81,25 @@ def test_stage1_separates_classes(tmp_path):
     assert res.ignored == 1
 
 
+def test_applied_dedup_and_marker(tmp_path):
+    clf = _train_tmp(tmp_path)
+    e = FakeEmbedder()
+    metas = [
+        _meta("a1", "We received your application", sender="jobs@acme.com"),
+        _meta("a2", "We received your application", sender="jobs@acme.com"),   # dup of a1
+        _meta("a3", "Your application was received at Beta", sender="hr@beta.com"),
+    ]
+    res = classify.run_stage1(metas, e, clf, {"update_candidate": 0.45})
+    assert res.applied_count == 2          # a1/a2 collapse, a3 distinct
+    assert res.applied_dups_dropped == 1
+
+
+def test_count_notification_format():
+    from autonotify.notify import count_notification
+    assert count_notification(3).title == "Application confirmations received: 3"
+    assert count_notification(3, approx=True).title == "Application confirmations received: ~3"
+
+
 def test_prototype_mode(tmp_path):
     store = tmp_path / "store.csv"
     with open(store, "w", newline="") as f:
@@ -109,7 +128,7 @@ def fake_runner(prompt: str):
     _extract_json by wrapping the verdict in ```json fences like `claude -p` does."""
     if "plausible" in prompt:
         return {"plausible": True}, 10, 2
-    from autoupdate.claude import _extract_json
+    from autonotify.claude import _extract_json
     fenced = ('```json\n{"is_real_update": true, "company": "Stripe", '
               '"update_type": "interview", "summary": "Interview invite."}\n```')
     return _extract_json(fenced), 100, 20
@@ -118,7 +137,7 @@ def fake_runner(prompt: str):
 def test_stage2_confirms_and_dedups():
     cand = types.SimpleNamespace(meta=_meta("m1", "Interview at Stripe"), update_prob=0.9)
     cand2 = types.SimpleNamespace(meta=_meta("m2", "Another email from Stripe"), update_prob=0.7)
-    from autoupdate.state import RunReport
+    from autonotify.state import RunReport
 
     class Cfg:
         def get(self, dotted, default=None):

@@ -1,5 +1,5 @@
 [project]
-name = "autoupdate"
+name = "autonotify"
 version = "0.1.0"
 description = "Privacy-preserving Gmail watcher for job-application activity (local semantic filter + Claude tiebreaker)"
 requires-python = ">=3.11"
@@ -20,11 +20,11 @@ dependencies = [
 dev = ["pytest>=8.0"]
 
 [project.scripts]
-autoupdate = "autoupdate.cli:main"
+autonotify = "autonotify.cli:main"
 
 [build-system]
 requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools]
-packages = ["autoupdate"]
+packages = ["autonotify"]

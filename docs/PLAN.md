@@ -13,7 +13,7 @@ Goal: a cron job (11:00 & 16:00 local) that per run sends two ntfy notifications
 locally before it costs a token. Validation is live: a dry-run decision log you skim + a one-command
 correction loop, not an upfront hand-labeled test set.
 
-Fresh repo at `/Users/liy02/Workspace/autoupdate` (empty, not yet git). Will `git init` and later
+Fresh repo at `/Users/liy02/Workspace/autonotify` (empty, not yet git). Will `git init` and later
 push to a private remote.
 
 ### Decisions locked from your feedback
@@ -38,13 +38,13 @@ candidates just skip the Claude confirmation. You flip Stage 2 on when the key e
 ## Repo structure (flat, ~6 modules)
 
 ```
-autoupdate/
+autonotify/
 ├── README.md                  # setup + the TODO checklist
-├── pyproject.toml             # deps + `autoupdate` console entrypoint
+├── pyproject.toml             # deps + `autonotify` console entrypoint
 ├── config.yaml                # thresholds, model choice, mode, stage2.enabled, notify_on_zero
 ├── .env.example               # NTFY_TOPIC, ANTHROPIC_API_KEY (real .env gitignored)
 ├── .gitignore                 # .env, credentials.json, token.json, data/model.pkl, logs/, state/
-├── autoupdate/
+├── autonotify/
 │   ├── __init__.py
 │   ├── cli.py                 # run [--dry-run] [--test-notify] | train | correct
 │   ├── gmail.py               # OAuth desktop flow + Stage 0 incremental pull (meta only)
@@ -107,9 +107,9 @@ Stage 2, **only** for survivors.
 - **Public real examples (optional grit)**: a small text-only, quality-filtered set folded into the
   same CSV as `source=public` if useful — not a separate shipped script.
 - **Corrections (the real validation)**: dry-run + live decisions are logged to `logs/decisions.jsonl`
-  (class, confidence, company, Gmail link; near-threshold easy to spot). `autoupdate correct` (or
+  (class, confidence, company, Gmail link; near-threshold easy to spot). `autonotify correct` (or
   editing the `label` column of a flagged CSV) appends a relabel as `source=correction`.
-  `autoupdate train` rebuilds the head from the whole store in one command. `train` prints 5-fold
+  `autonotify train` rebuilds the head from the whole store in one command. `train` prints 5-fold
   CV accuracy / per-class P-R as a sanity check (the real metric is your flags).
 
 ---
@@ -117,10 +117,10 @@ Stage 2, **only** for survivors.
 ## Cron
 
 ```
-0 11 * * *  /Users/liy02/Workspace/autoupdate/scripts/run.sh >> .../logs/cron.log 2>&1
-0 16 * * *  /Users/liy02/Workspace/autoupdate/scripts/run.sh >> .../logs/cron.log 2>&1
+0 11 * * *  /Users/liy02/Workspace/autonotify/scripts/run.sh >> .../logs/cron.log 2>&1
+0 16 * * *  /Users/liy02/Workspace/autonotify/scripts/run.sh >> .../logs/cron.log 2>&1
 ```
-`install_cron.sh` installs them; `run.sh` activates the venv + runs `autoupdate run` (use
+`install_cron.sh` installs them; `run.sh` activates the venv + runs `autonotify run` (use
 `--dry-run` during the trial week). Logs in `logs/`; state in `state/`.
 
 ---
@@ -151,9 +151,9 @@ exact click paths.
 
 - **Offline unit**: `pytest tests/` — Stage 1 classify on `tests/fixtures/`, Stage 2 JSON parse
   against a mocked Anthropic client. No network.
-- **Notify smoke**: `autoupdate run --test-notify` sends one sample of each notification to your
+- **Notify smoke**: `autonotify run --test-notify` sends one sample of each notification to your
   ntfy topic (after you set it) so you confirm format on your phone.
-- **Pull smoke**: `autoupdate run --dry-run` after OAuth — confirms pull + checkpoint + decision log
+- **Pull smoke**: `autonotify run --dry-run` after OAuth — confirms pull + checkpoint + decision log
   without sending.
 - **Live acceptance**: ~1 week `--dry-run`, skim `logs/decisions.jsonl`, `correct` + `train`, then
   flip cron to live (and `stage2.enabled: true` once the API key exists).

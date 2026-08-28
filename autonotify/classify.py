@@ -140,9 +140,25 @@ class Candidate:
 
 @dataclass
 class Stage1Result:
-    applied_count: int
+    applied_count: int              # deduped count of application-confirmation emails
     update_candidates: list[Candidate]
     ignored: int
+    applied_dups_dropped: int = 0   # how many duplicate confirmations were collapsed
+
+
+def _sender_email(sender: str) -> str:
+    """Extract the address from a From header like 'AMD Careers <x@y.com>'."""
+    if "<" in sender and ">" in sender:
+        return sender[sender.find("<") + 1 : sender.find(">")].strip().lower()
+    return sender.strip().lower()
+
+
+def _dedup_key(meta) -> tuple[str, str]:
+    """Two confirmations collapse when they share a normalized subject AND sender.
+    This catches ATS double-sends and identical duplicate emails. Note it cannot
+    tell two genuinely different roles apart when the subject is generic (same
+    subject + same sender) — hence the '~' marker on the count when dups are dropped."""
+    return (" ".join(meta.subject.lower().split()), _sender_email(meta.sender))
 
 
 def run_stage1(metas, embedder, clf: Classifier, thresholds: dict, decision_log=None) -> Stage1Result:
@@ -160,7 +176,7 @@ def run_stage1(metas, embedder, clf: Classifier, thresholds: dict, decision_log=
     X = embedder.encode([m.text for m in metas])
     proba = clf.predict_proba(X)
 
-    applied = 0
+    applied_metas: list = []
     candidates: list[Candidate] = []
     ignored = 0
     up_thresh = float(thresholds.get("update_candidate", 0.45))
@@ -176,7 +192,7 @@ def run_stage1(metas, embedder, clf: Classifier, thresholds: dict, decision_log=
             candidates.append(Candidate(m, p_update))
         elif argmax_lbl == "applied":
             decision = "applied"
-            applied += 1
+            applied_metas.append(m)
         else:
             decision = "ignore"
             ignored += 1
@@ -195,4 +211,6 @@ def run_stage1(metas, embedder, clf: Classifier, thresholds: dict, decision_log=
                 link=f"https://mail.google.com/mail/u/0/#all/{m.id}",
             )
 
-    return Stage1Result(applied, candidates, ignored)
+    unique_applied = len({_dedup_key(m) for m in applied_metas})
+    dups_dropped = len(applied_metas) - unique_applied
+    return Stage1Result(unique_applied, candidates, ignored, dups_dropped)

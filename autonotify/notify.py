@@ -78,9 +78,12 @@ class ConsoleNotifier(Notifier):
 # --------------------------------------------------------------------------- #
 # Builders — turn pipeline results into Notifications
 # --------------------------------------------------------------------------- #
-def count_notification(applied_count: int) -> Notification:
+def count_notification(applied_count: int, approx: bool = False) -> Notification:
+    """approx=True prefixes the number with '~' — used when duplicate confirmations
+    were collapsed, so the count is a best-effort estimate rather than exact."""
+    n = f"~{applied_count}" if approx else str(applied_count)
     return Notification(
-        title=f"Applications sent: {applied_count}",
+        title=f"Application confirmations received: {n}",
         body=hype_line(),
         priority=3,
         tags=["briefcase"],

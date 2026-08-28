@@ -11,4 +11,4 @@ if [ -d ".venv" ]; then
   source .venv/bin/activate
 fi
 
-exec autoupdate run "$@"
+exec autonotify run "$@"
