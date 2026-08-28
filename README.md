@@ -39,7 +39,7 @@ autonotify run --dry-run     # prints instead of sending; --test-notify checks n
 ## Run it daily
 
 ```bash
-bash scripts/install_cron.sh   # 11:00 local, once a day
+bash scripts/install_launchd.sh   # 11:00 local; catches up on wake if the Mac was asleep
 ```
 
 Manual commands: `autonotify run` (send), `autonotify run --dry-run` (preview),

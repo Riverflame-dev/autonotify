@@ -3,6 +3,9 @@
 # Pass --dry-run during the trial week (edit the crontab or this line).
 set -euo pipefail
 
+# launchd/cron give a minimal PATH; ensure Homebrew (for `claude`) is reachable.
+export PATH="/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
+
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$REPO_DIR"
 
