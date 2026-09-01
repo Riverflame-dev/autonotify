@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Install a launchd agent that runs autonotify at 11:00 daily.
+# Install a launchd agent that runs autonotify at 09:00 daily.
 # Unlike cron, launchd runs a missed job when the Mac next wakes.
 set -euo pipefail
 
@@ -22,7 +22,7 @@ cat > "$PLIST" <<PLIST_EOF
     </array>
     <key>StartCalendarInterval</key>
     <dict>
-        <key>Hour</key><integer>11</integer>
+        <key>Hour</key><integer>9</integer>
         <key>Minute</key><integer>0</integer>
     </dict>
     <key>EnvironmentVariables</key>
@@ -39,7 +39,7 @@ PLIST_EOF
 launchctl unload "$PLIST" 2>/dev/null || true
 launchctl load -w "$PLIST"
 
-echo "Loaded $LABEL — runs 11:00 daily, catches up on wake if the Mac was asleep."
+echo "Loaded $LABEL — runs 09:00 daily, catches up on wake if the Mac was asleep."
 echo "Plist : $PLIST"
 echo "Logs  : $REPO_DIR/logs/launchd.log"
 echo "Remove with: launchctl unload \"$PLIST\" && rm \"$PLIST\""
