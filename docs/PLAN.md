@@ -13,7 +13,7 @@ Goal: a cron job (11:00 & 16:00 local) that per run sends two ntfy notifications
 locally before it costs a token. Validation is live: a dry-run decision log you skim + a one-command
 correction loop, not an upfront hand-labeled test set.
 
-Fresh repo at `/Users/liy02/Workspace/autonotify` (empty, not yet git). Will `git init` and later
+Fresh repo at `~/Workspace/autonotify` (empty, not yet git). Will `git init` and later
 push to a private remote.
 
 ### Decisions locked from your feedback
@@ -117,8 +117,8 @@ Stage 2, **only** for survivors.
 ## Cron
 
 ```
-0 11 * * *  /Users/liy02/Workspace/autonotify/scripts/run.sh >> .../logs/cron.log 2>&1
-0 16 * * *  /Users/liy02/Workspace/autonotify/scripts/run.sh >> .../logs/cron.log 2>&1
+0 11 * * *  ~/Workspace/autonotify/scripts/run.sh >> .../logs/cron.log 2>&1
+0 16 * * *  ~/Workspace/autonotify/scripts/run.sh >> .../logs/cron.log 2>&1
 ```
 `install_cron.sh` installs them; `run.sh` activates the venv + runs `autonotify run` (use
 `--dry-run` during the trial week). Logs in `logs/`; state in `state/`.
