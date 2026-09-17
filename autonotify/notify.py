@@ -28,6 +28,25 @@ def hype_line() -> str:
     return random.choice(HYPE_LINES)
 
 
+# Shown instead of a bare "Rejection" line — a closed door, not a verdict on you.
+SUPPORT_LINES = [
+    "Their loss — they didn't get to see what you'd have built. Next. 💪",
+    "Wrong room, not wrong you. The right one is still out there. 🚪",
+    "They passed on someone good. That's on them. Keep going. ⚡",
+    "One door shut. You've still got every bit of what got you the interview. 🔑",
+    "Not a no to you — a no to a fit. Those are different things. 🌱",
+    "They missed out. Someone else won't. On to the next. 🎯",
+    "This one wasn't yours. Doesn't mean the next one isn't. 🧭",
+    "Closed doors narrow the search. You're getting warmer. 🔥",
+    "You put yourself out there again. That part never stops counting. 📈",
+    "Their bar, their call, their loss. Your streak continues. 🏃",
+]
+
+
+def support_line() -> str:
+    return random.choice(SUPPORT_LINES)
+
+
 @dataclass
 class Notification:
     title: str
@@ -93,6 +112,20 @@ def count_notification(applied_count: int, approx: bool = False) -> Notification
 def update_notification(update) -> Notification:
     """update: claude.ConfirmedUpdate"""
     from .state import gmail_link
+
+    # A rejection is reframed as an opening closing, and led with encouragement —
+    # the factual summary still follows so you know which role it was.
+    if update.update_type == "rejection":
+        body = support_line()
+        if update.summary:
+            body = f"{body}\n{update.summary}"
+        return Notification(
+            title=f"Opening closed — {update.company}",
+            body=body,
+            priority=update.ntfy_priority,
+            tags=["muscle"],
+            click_url=gmail_link(update.msg_id),
+        )
 
     label = update.update_type.upper() if update.update_type in ("oa",) else update.update_type.capitalize()
     return Notification(
