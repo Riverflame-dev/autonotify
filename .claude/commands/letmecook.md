@@ -40,13 +40,19 @@ Three traps, all of which cost real debugging time:
 - **No app logo** — uploading one forces mandatory Google verification.
 - Terms of service is optional; leave it blank.
 
-**Phone** — generate a private topic, put it in `.env`, subscribe to it in the ntfy app:
+**Phone** — notifications arrive through the free ntfy app, so they need it installed:
 
-```bash
-python3 -c "import secrets; print('autonotify-' + secrets.token_urlsafe(16))"
-cp .env.example .env    # set NTFY_TOPIC; leave ANTHROPIC_API_KEY blank
-autonotify run --test-notify
-```
+1. Install **ntfy** from the iOS App Store or Google Play.
+2. Generate a private topic and put it in `.env`:
+   ```bash
+   python3 -c "import secrets; print('autonotify-' + secrets.token_urlsafe(16))"
+   cp .env.example .env    # set NTFY_TOPIC; leave ANTHROPIC_API_KEY blank
+   ```
+3. In the app: **+** → Subscribe to topic → paste that exact string.
+4. Confirm the round trip — their phone should buzz:
+   ```bash
+   autonotify run --test-notify
+   ```
 
 Anyone who knows that topic string can read their notifications — keep it out of commits
 and issues.
@@ -65,6 +71,29 @@ classifications together, then run `autonotify run` once for real and schedule i
 bash scripts/install_launchd.sh
 launchctl list | grep com.autonotify.daily   # 2nd column is last exit status; 0 is healthy
 ```
+
+## Teach it their inbox
+
+The bundled `data/store.seed.csv` is only ~114 **synthetic** examples with placeholder
+companies — enough to boot, not enough to be sharp on their real mail. Accuracy comes from
+correcting it on their own inbox, so set this expectation up front rather than letting them
+discover it through bad notifications.
+
+After a few `--dry-run` passes, have them relabel anything it got wrong and retrain:
+
+```bash
+autonotify correct --id <msg-id> --label <applied|update|ignore>   # id from logs/decisions.jsonl
+autonotify correct --text "Some subject line" --label ignore       # or paste the text directly
+autonotify train
+```
+
+The first `correct` or `train` seeds `data/store.csv` from the tracked synthetic set, then
+appends their corrections on top. **`data/store.csv` is gitignored** — it accumulates real
+subject lines from their inbox, so it stays on their machine and never lands in a public repo.
+Only the synthetic `store.seed.csv` is tracked.
+
+Twenty or thirty corrections over the first couple of weeks makes a large difference,
+especially on the `update` vs `ignore` boundary where recruiter spam mimics real updates.
 
 ---
 

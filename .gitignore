@@ -18,3 +18,7 @@ state/
 
 # OS
 .DS_Store
+
+# Local training store — accumulates real subject lines via `autonotify correct`.
+# The tracked starter set is data/store.seed.csv.
+data/store.csv

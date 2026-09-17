@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import shutil
 import sys
 from datetime import datetime, timezone
 from functools import partial
@@ -123,7 +124,7 @@ def cmd_train(cfg: Config, mode: str | None, model_name: str | None) -> int:
     model_name = model_name or cfg.get("embedding_model")
     print(f"Loading embedder {model_name} …")
     embedder = classify.SentenceTransformerEmbedder(model_name)
-    report = classify.train(cfg.path("store"), embedder, mode, cfg.path("model"))
+    report = classify.train(_ensure_store(cfg), embedder, mode, cfg.path("model"))
     print(report)
     return 0
 
@@ -131,6 +132,23 @@ def cmd_train(cfg: Config, mode: str | None, model_name: str | None) -> int:
 # --------------------------------------------------------------------------- #
 # correct
 # --------------------------------------------------------------------------- #
+def _ensure_store(cfg):
+    """Return the training store, seeding it on first use.
+
+    `data/store.csv` is local-only: `autonotify correct` appends real subject lines
+    from your inbox to it. The tracked `data/store.seed.csv` holds only the synthetic
+    starter examples, so a fresh clone has something to train on.
+    """
+    store = cfg.path("store")
+    if not store.exists():
+        seed = store.with_name("store.seed.csv")
+        if seed.exists():
+            store.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(seed, store)
+            print(f"Seeded {store} from {seed.name} ({seed.name} is the tracked starter set).")
+    return store
+
+
 def cmd_correct(cfg: Config, msg_id: str | None, text: str | None, label: str) -> int:
     if label not in classify.LABELS:
         print(f"label must be one of {classify.LABELS}", file=sys.stderr)
@@ -149,7 +167,7 @@ def cmd_correct(cfg: Config, msg_id: str | None, text: str | None, label: str) -
         print("Provide --text, or --id of an email already in logs/decisions.jsonl.", file=sys.stderr)
         return 1
 
-    store = cfg.path("store")
+    store = _ensure_store(cfg)
     store.parent.mkdir(parents=True, exist_ok=True)
     write_header = not store.exists()
     with open(store, "a", newline="", encoding="utf-8") as f:
