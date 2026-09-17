@@ -44,9 +44,8 @@ bash scripts/install_launchd.sh   # 09:00 local; catches up on wake if the Mac w
 
 ## Setting this up yourself
 
-Clone it, open Claude Code in the repo, and run `/setup` — it walks through deps, the
-Google OAuth consent screen (including the publishing-status trap that silently kills
-refresh tokens after 7 days), ntfy, and the daily job.
+Clone it, open Claude Code in the repo, and run `/setup` — three steps: install, connect
+Gmail + your phone, schedule it.
 
 Manual commands: `autonotify run` (send), `autonotify run --dry-run` (preview),
 `autonotify correct --id <msg> --label <applied|update|ignore>` then `autonotify train`
